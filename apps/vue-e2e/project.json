@@ -1,0 +1,10 @@
+{
+  "name": "vue-e2e",
+  "$schema": "../../node_modules/nx/schemas/project-schema.json",
+  "projectType": "application",
+  "sourceRoot": "apps/vue-e2e/src",
+  "tags": [],
+  "implicitDependencies": ["vue"],
+  "// targets": "to see all targets run: nx show project vue-e2e --web",
+  "targets": {}
+}
