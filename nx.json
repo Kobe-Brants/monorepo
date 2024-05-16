@@ -10,7 +10,10 @@
       "!{projectRoot}/tsconfig.spec.json",
       "!{projectRoot}/cypress/**/*",
       "!{projectRoot}/**/*.cy.[jt]s?(x)",
-      "!{projectRoot}/cypress.config.[jt]s"
+      "!{projectRoot}/cypress.config.[jt]s",
+      "!{projectRoot}/jest.config.[jt]s",
+      "!{projectRoot}/src/test-setup.[jt]s",
+      "!{projectRoot}/test-setup.[jt]s"
     ],
     "sharedGlobals": []
   },
@@ -18,7 +21,8 @@
     {
       "plugin": "@nx/eslint/plugin",
       "options": {
-        "targetName": "lint"
+        "targetName": "lint",
+        "extensions": ["ts", "tsx", "js", "jsx", "html", "vue"]
       }
     },
     {
@@ -39,7 +43,26 @@
         "componentTestingTargetName": "component-test",
         "ciTargetName": "e2e-ci"
       }
+    },
+    {
+      "plugin": "@nx/jest/plugin",
+      "options": {
+        "targetName": "test"
+      },
+      "exclude": ["apps/fastify-api-e2e/**/*"]
     }
   ],
-  "nxCloudAccessToken": "Y2YwZmZkYjItZDMzNi00OTE5LWFjM2UtMmJlYmFmNWJmZjVjfHJlYWQtd3JpdGU="
+  "nxCloudAccessToken": "Y2YwZmZkYjItZDMzNi00OTE5LWFjM2UtMmJlYmFmNWJmZjVjfHJlYWQtd3JpdGU=",
+  "targetDefaults": {
+    "@nx/esbuild:esbuild": {
+      "cache": true,
+      "dependsOn": ["^build"],
+      "inputs": ["production", "^production"]
+    },
+    "@nx/vite:build": {
+      "cache": true,
+      "dependsOn": ["^build"],
+      "inputs": ["production", "^production"]
+    }
+  }
 }

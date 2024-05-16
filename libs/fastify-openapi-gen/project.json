@@ -1,0 +1,19 @@
+{
+  "name": "fastify-openapi-gen",
+  "$schema": "../../node_modules/nx/schemas/project-schema.json",
+  "sourceRoot": "libs/fastify-openapi-gen/src",
+  "projectType": "library",
+  "tags": [],
+  "targets": {
+    "build": {
+      "executor": "@nx/vite:build",
+      "outputs": ["{options.outputPath}"],
+      "options": {
+        "outputPath": "dist/libs/fastify-openapi-gen",
+        "main": "libs/fastify-openapi-gen/src/index.ts",
+        "tsConfig": "libs/fastify-openapi-gen/tsconfig.lib.json",
+        "assets": ["libs/fastify-openapi-gen/*.md"]
+      }
+    }
+  }
+}
