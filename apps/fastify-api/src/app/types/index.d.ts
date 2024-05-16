@@ -4,10 +4,6 @@ import { EnvSchemaType } from '../schemas/dotenv';
 import { BetterSQLite3Database } from 'drizzle-orm/better-sqlite3';
 
 declare module 'fastify' {
-  type UserDataSource = {
-    findUser: (email: string) => Promise<QueryResult<any>>;
-  };
-
   export interface FastifyRequest {
     generateToken: (payload: Record<string, any>) => string;
   }
@@ -19,7 +15,6 @@ declare module 'fastify' {
   > {
     db: BetterSQLite3Database;
     config: EnvSchemaType;
-    usersDataSource: UserDataSource;
     authenticate: (request: FastifyRequest, reply: FastifyReply) => void;
   }
 }

@@ -15,16 +15,16 @@ export async function app(fastify: FastifyInstance, opts: FastifyPluginOptions) 
   fastify.register(cors);
 
   // TODO move
-  fastify.addSchema({
-    $id: 'user',
-    type: 'object',
-    properties: {
-      id: {
-        type: 'string',
-        description: 'user id',
-      },
-    },
-  });
+  // fastify.addSchema({
+  //   $id: 'user',
+  //   type: 'object',
+  //   properties: {
+  //     id: {
+  //       type: 'string',
+  //       description: 'user id',
+  //     },
+  //   },
+  // });
 
   await fastify.register(AutoLoad, {
     dir: path.join(__dirname, 'plugins'),

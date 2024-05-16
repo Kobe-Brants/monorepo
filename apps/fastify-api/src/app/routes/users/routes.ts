@@ -1,7 +1,7 @@
 import { FastifyInstance, FastifyReply, FastifyRequest } from 'fastify';
-import { User } from '../../models/users/user';
 import { createUser, deleteUser, getAllUsers, getUserById, updateUser } from '../../controllers/users';
 import fp from 'fastify-plugin';
+import { User } from '../../../schema/users';
 
 export default fp(
   async function users(fastify: FastifyInstance) {

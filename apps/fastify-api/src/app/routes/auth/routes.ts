@@ -1,6 +1,7 @@
 import fp from 'fastify-plugin';
 import { LoginBodySchema, LoginBodySchemaType } from './schemas/login';
 import { generateHash } from '../../utils/generate_hash';
+import { getUserByEmail } from '../../controllers/users';
 
 export default fp(
   async function auth(fastify) {
@@ -12,7 +13,7 @@ export default fp(
         },
       },
       async request => {
-        const user = await fastify.usersDataSource.findUser(request.body.email);
+        const user = await getUserByEmail(fastify.db, request.body.email);
         if (!user) {
           throw fastify.httpErrors.unauthorized('Wrong credentials provided!');
         }

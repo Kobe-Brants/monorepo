@@ -51,6 +51,34 @@
           "buildTarget": "fastify-api:build:production"
         }
       }
+    },
+    "drizzle-studio": {
+      "executor": "nx:run-commands",
+      "options": {
+        "command": "drizzle-kit studio",
+        "cwd": "./apps/fastify-api"
+      }
+    },
+    "drizzle-generate": {
+      "executor": "nx:run-commands",
+      "options": {
+        "command": "drizzle-kit generate",
+        "cwd": "./apps/fastify-api"
+      }
+    },
+    "drizzle-push": {
+      "executor": "nx:run-commands",
+      "options": {
+        "command": "drizzle-kit push",
+        "cwd": "./apps/fastify-api"
+      }
+    },,
+    "drizzle-drop": {
+      "executor": "nx:run-commands",
+      "options": {
+        "command": "drizzle-kit drop",
+        "cwd": "./apps/fastify-api"
+      }
     }
   }
 }

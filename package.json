@@ -9,7 +9,11 @@
     "test": "nx run vue:test",
     "e2e": "nx run vue-e2e:e2e",
     "build": "nx run vue:build --configuration=production",
-    "api-gen:fastify-api": "openapi-typescript http://localhost:3000/documentation/json --output .libs/fastify-openapi-gen/src/lib/models.ts"
+    "api-gen:fastify-api": "openapi-typescript http://localhost:3000/documentation/json --output .libs/fastify-openapi-gen/src/lib/models.ts",
+    "drizzle:studio": "nx run fastify-api:drizzle-studio",
+    "drizzle:generate": "nx run fastify-api:drizzle-generate",
+    "drizzle:push": "nx run fastify-api:drizzle-push",
+    "drizzle:drop": "nx run fastify-api:drizzle-drop"
   },
   "private": true,
   "dependencies": {
@@ -23,11 +27,13 @@
     "axios": "^1.6.8",
     "better-sqlite3": "^10.0.0",
     "drizzle-orm": "^0.30.10",
+    "drizzle-zod": "^0.5.1",
     "fastify": "~4.13.0",
     "fastify-plugin": "~4.5.0",
     "tslib": "^2.3.0",
     "vue": "^3.3.4",
-    "vue-router": "^4.3.2"
+    "vue-router": "^4.3.2",
+    "zod": "^3.23.8"
   },
   "devDependencies": {
     "@nx/cypress": "19.0.3",
@@ -56,6 +62,7 @@
     "@vue/eslint-config-typescript": "^11.0.3",
     "@vue/test-utils": "^2.4.1",
     "cypress": "^13.6.6",
+    "drizzle-kit": "^0.21.2",
     "esbuild": "^0.19.2",
     "eslint": "~8.57.0",
     "eslint-config-prettier": "^9.0.0",

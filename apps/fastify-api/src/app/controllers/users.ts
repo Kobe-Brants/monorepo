@@ -1,25 +1,17 @@
-import { sqliteTable, text } from 'drizzle-orm/sqlite-core';
-import { eq, sql } from 'drizzle-orm';
-import { User } from '../models/users/user';
+import { eq } from 'drizzle-orm';
 import { BetterSQLite3Database } from 'drizzle-orm/better-sqlite3';
-
-const users = sqliteTable('users', {
-  id: text('id').primaryKey(),
-  name: text('name'),
-  email: text('email'),
-  created: text('created').default(sql`(CURRENT_TIMESTAMP)`),
-});
+import { User, users } from '../../schema/users';
 
 export const getAllUsers = async (db: BetterSQLite3Database) => {
   return db.select().from(users).all();
 };
 
 export const getUserById = async (db: BetterSQLite3Database, id: string) => {
-  return db.select().from(users).where(eq(users.id, id));
+  return db.select().from(users).where(eq(users.id, id))[0];
 };
 
 export const getUserByEmail = async (db: BetterSQLite3Database, email: string) => {
-  return db.select().from(users).where(eq(users.email, email));
+  return db.select().from(users).where(eq(users.email, email))[0];
 };
 
 export const createUser = async (db: BetterSQLite3Database, user: User) => {
