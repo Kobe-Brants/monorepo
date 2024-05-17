@@ -72,7 +72,7 @@
         "command": "drizzle-kit push",
         "cwd": "./apps/fastify-api"
       }
-    },,
+    },
     "drizzle-drop": {
       "executor": "nx:run-commands",
       "options": {
