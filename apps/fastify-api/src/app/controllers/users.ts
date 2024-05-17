@@ -1,17 +1,17 @@
 import { eq } from 'drizzle-orm';
 import { BetterSQLite3Database } from 'drizzle-orm/better-sqlite3';
-import { User, users } from '../../schema/users';
+import { User, users } from '../../drizzle-schemas/users';
 
 export const getAllUsers = async (db: BetterSQLite3Database) => {
   return db.select().from(users).all();
 };
 
 export const getUserById = async (db: BetterSQLite3Database, id: string) => {
-  return db.select().from(users).where(eq(users.id, id))[0];
+  return (await db.select().from(users).where(eq(users.id, id))).at(0);
 };
 
 export const getUserByEmail = async (db: BetterSQLite3Database, email: string) => {
-  return db.select().from(users).where(eq(users.email, email))[0];
+  return (await db.select().from(users).where(eq(users.email, email))).at(0);
 };
 
 export const createUser = async (db: BetterSQLite3Database, user: User) => {

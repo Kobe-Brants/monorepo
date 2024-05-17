@@ -1,7 +1,8 @@
 import { FastifyInstance, FastifyReply, FastifyRequest } from 'fastify';
 import { createUser, deleteUser, getAllUsers, getUserById, updateUser } from '../../controllers/users';
 import fp from 'fastify-plugin';
-import { User } from '../../../schema/users';
+import { User } from '../../../drizzle-schemas/users';
+import { generateHash } from '../../utils/generate_hash';
 
 export default fp(
   async function users(fastify: FastifyInstance) {
@@ -13,9 +14,20 @@ export default fp(
       const userId = request.params.id;
 
       const user = await getUserById(fastify.db, userId);
-      if (user && user.length > 0) return user[0];
+      if (user) return user;
 
       reply.code(404).send({ error: 'Not found' });
+    });
+
+    fastify.get('/seed', async () => {
+      const { salt, hash } = await generateHash('123456');
+
+      return await createUser(fastify.db, {
+        name: 'Kobe',
+        email: 'kobe.brants@telenet.be',
+        password: hash,
+        salt: salt,
+      } as User);
     });
 
     fastify.post('/', async (request: FastifyRequest<{ Body: { name: string } }>, reply: FastifyReply) => {

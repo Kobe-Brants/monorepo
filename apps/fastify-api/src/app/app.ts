@@ -40,4 +40,11 @@ export async function app(fastify: FastifyInstance, opts: FastifyPluginOptions) 
     console.log('CURRENT ROUTES:');
     console.log(fastify.printRoutes());
   }
+
+  fastify.addHook('onRequest', (request, reply, done) => {
+    // TODO
+
+    request.jwtVerify();
+    done();
+  });
 }
