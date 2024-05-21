@@ -1,5 +1,5 @@
 import OpenAPIClientAxios from 'openapi-client-axios';
-import { Client as ApiClient } from '@monorepo-demo/fastify-openapi-gen/client';
+import { Client as ApiClient, Components } from '@monorepo-demo/fastify-openapi-gen/client';
 
 const api = new OpenAPIClientAxios({
   definition: 'http://localhost:3000/documentation/json',
@@ -7,6 +7,9 @@ const api = new OpenAPIClientAxios({
     baseURL: 'http://localhost:3000',
   },
 });
+
+export type GetUsersResponseBodySchema = Components.Schemas.Def1.Properties.GetUsersResponseBodySchema;
+export type GetUserResponseBodySchema = Components.Schemas.Def1.Properties.GetUserResponseBodySchema;
 
 export default {
   async getUsers() {

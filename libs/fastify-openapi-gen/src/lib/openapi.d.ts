@@ -9,7 +9,7 @@ import type {
 declare namespace Components {
     namespace Schemas {
         /**
-         * Schema
+         * authSchemas
          */
         export interface Def0 {
             loginBodySchema: {
@@ -31,6 +31,47 @@ declare namespace Components {
                     result: string;
                     token: string;
                 }
+            }
+        }
+        /**
+         * usersSchemas
+         */
+        export interface Def1 {
+            getUsersResponseBodySchema: {
+                id: string;
+                name: string;
+                email: string;
+                password: string;
+                salt: string;
+                created: string;
+            }[];
+            getUserResponseBodySchema: {
+                id: string;
+                name: string;
+                email: string;
+                password: string;
+                salt: string;
+                created: string;
+            };
+        }
+        namespace Def1 {
+            namespace Properties {
+                export interface GetUserResponseBodySchema {
+                    id: string;
+                    name: string;
+                    email: string;
+                    password: string;
+                    salt: string;
+                    created: string;
+                }
+                export type GetUsersResponseBodySchema = {
+                    id: string;
+                    name: string;
+                    email: string;
+                    password: string;
+                    salt: string;
+                    created: string;
+                }[];
             }
         }
     }
@@ -92,14 +133,12 @@ declare namespace Paths {
             id: Parameters.Id;
         }
         namespace Responses {
-            export interface $200 {
-            }
+            export type $200 = Components.Schemas.Def1.Properties.GetUserResponseBodySchema;
         }
     }
     namespace GetUsers {
         namespace Responses {
-            export interface $200 {
-            }
+            export type $200 = Components.Schemas.Def1.Properties.GetUsersResponseBodySchema;
         }
     }
     namespace Login {
@@ -111,22 +150,6 @@ declare namespace Paths {
 }
 
 export interface OperationMethods {
-  /**
-   * getUsers
-   */
-  'getUsers'(
-    parameters?: Parameters<UnknownParamsObject> | null,
-    data?: any,
-    config?: AxiosRequestConfig  
-  ): OperationResponse<Paths.GetUsers.Responses.$200>
-  /**
-   * getUser
-   */
-  'getUser'(
-    parameters: Parameters<Paths.GetUser.PathParameters>,
-    data?: any,
-    config?: AxiosRequestConfig  
-  ): OperationResponse<Paths.GetUser.Responses.$200>
   /**
    * login
    */
@@ -143,9 +166,45 @@ export interface OperationMethods {
     data?: any,
     config?: AxiosRequestConfig  
   ): OperationResponse<Paths.GetHealth.Responses.$200>
+  /**
+   * getUsers
+   */
+  'getUsers'(
+    parameters?: Parameters<UnknownParamsObject> | null,
+    data?: any,
+    config?: AxiosRequestConfig  
+  ): OperationResponse<Paths.GetUsers.Responses.$200>
+  /**
+   * getUser
+   */
+  'getUser'(
+    parameters: Parameters<Paths.GetUser.PathParameters>,
+    data?: any,
+    config?: AxiosRequestConfig  
+  ): OperationResponse<Paths.GetUser.Responses.$200>
 }
 
 export interface PathsDictionary {
+  ['/api/auth/login']: {
+    /**
+     * login
+     */
+    'post'(
+      parameters?: Parameters<UnknownParamsObject> | null,
+      data?: Paths.Login.RequestBody,
+      config?: AxiosRequestConfig  
+    ): OperationResponse<Paths.Login.Responses.$200>
+  }
+  ['/api/health/']: {
+    /**
+     * getHealth
+     */
+    'get'(
+      parameters?: Parameters<UnknownParamsObject> | null,
+      data?: any,
+      config?: AxiosRequestConfig  
+    ): OperationResponse<Paths.GetHealth.Responses.$200>
+  }
   ['/api/users/']: {
     /**
      * getUsers
@@ -167,26 +226,6 @@ export interface PathsDictionary {
     ): OperationResponse<Paths.GetUser.Responses.$200>
   }
   ['/api/users/seed']: {
-  }
-  ['/api/auth/login']: {
-    /**
-     * login
-     */
-    'post'(
-      parameters?: Parameters<UnknownParamsObject> | null,
-      data?: Paths.Login.RequestBody,
-      config?: AxiosRequestConfig  
-    ): OperationResponse<Paths.Login.Responses.$200>
-  }
-  ['/api/health/']: {
-    /**
-     * getHealth
-     */
-    'get'(
-      parameters?: Parameters<UnknownParamsObject> | null,
-      data?: any,
-      config?: AxiosRequestConfig  
-    ): OperationResponse<Paths.GetHealth.Responses.$200>
   }
 }
 

@@ -30,7 +30,7 @@
     "fastify": "~4.15.0",
     "fastify-plugin": "~4.5.0",
     "fastify-zod": "^1.4.0",
-    "openapi-client-axios": "^7.5.4",
+    "openapi-client-axios-typegen": "^7.6.0",
     "tslib": "^2.3.0",
     "vue": "^3.3.4",
     "vue-router": "^4.3.2",

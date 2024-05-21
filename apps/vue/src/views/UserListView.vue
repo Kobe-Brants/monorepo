@@ -1,19 +1,19 @@
 <script setup lang="ts">
-import { ref, onMounted } from 'vue'
-import UserService from '../services/UserService';
+import { ref, onMounted } from 'vue';
+import UserService, { GetUsersResponseBodySchema } from '../services/UserService';
 import UserCard from '../components/UserCard.vue';
 
-const users = ref(null)
+const users = ref<GetUsersResponseBodySchema | null>(null);
 
 onMounted(() => {
   UserService.getUsers()
-    .then((response) => {
-      users.value = response.data
+    .then(response => {
+      users.value = response.data;
     })
-    .catch((error) => {
-      console.log(error)
-    })
-})
+    .catch(error => {
+      console.log(error);
+    });
+});
 </script>
 
 <template>

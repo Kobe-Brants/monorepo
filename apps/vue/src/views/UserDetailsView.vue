@@ -1,20 +1,14 @@
 <script setup lang="ts">
 import { ref, onMounted } from 'vue';
-import UserService from '../services/UserService';
+import UserService, { GetUserResponseBodySchema } from '../services/UserService';
 import { useRoute } from 'vue-router';
 
-// TODO replace by openapi
-interface User {
-  name: string;
-  created: Date;
-}
-
 const route = useRoute();
-const user = ref<User | null>(null);
+const user = ref<GetUserResponseBodySchema | null>(null);
 
 onMounted(() => {
   UserService.getUser(route.params.id as string)
-    .then((response) => {
+    .then(response => {
       user.value = response.data;
     })
     .catch((error: Error) => {

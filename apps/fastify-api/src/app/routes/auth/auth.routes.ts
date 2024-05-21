@@ -1,7 +1,7 @@
 import fp from 'fastify-plugin';
 import { generateHash } from '../../utils/generate_hash';
 import { getUserByEmail } from '../../controllers/users';
-import { $ref, LoginBodySchema } from './schemas/login';
+import { $ref, LoginBodySchema } from './auth.schemas';
 
 export default fp(
   async function auth(fastify) {

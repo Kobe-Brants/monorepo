@@ -12,7 +12,10 @@ const loginResponseSchema = z.object({
   token: z.string(),
 });
 
-export const { schemas: userSchemas, $ref } = buildJsonSchemas({
-  loginBodySchema,
-  loginResponseSchema,
-});
+export const { schemas: authSchemas, $ref } = buildJsonSchemas(
+  {
+    loginBodySchema,
+    loginResponseSchema,
+  },
+  { $id: 'authSchemas' }
+);

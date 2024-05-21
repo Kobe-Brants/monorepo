@@ -3,16 +3,17 @@ import { createUser, deleteUser, getAllUsers, getUserById, updateUser } from '..
 import fp from 'fastify-plugin';
 import { User } from '../../../drizzle-schemas/users';
 import { generateHash } from '../../utils/generate_hash';
+import { $ref, GetUserResponseBodySchema, GetUsersResponseBodySchema } from './users.schemas';
 
 export default fp(
   async function users(fastify: FastifyInstance) {
-    fastify.get('/', { schema: { tags: ['User'], operationId: 'getUsers' }, preHandler: [fastify.authenticate] }, async () => {
+    fastify.get('/', { schema: { tags: ['User'], operationId: 'getUsers', response: { 200: $ref('getUsersResponseBodySchema') } }, preHandler: [fastify.authenticate] }, async () => {
       return getAllUsers(fastify.db);
     });
 
     fastify.get(
       '/:id',
-      { schema: { tags: ['User'], operationId: 'getUser' }, preHandler: [fastify.authenticate] },
+      { schema: { tags: ['User'], operationId: 'getUser', response: { 200: $ref('getUserResponseBodySchema') } }, preHandler: [fastify.authenticate] },
       async (request: FastifyRequest<{ Params: { id: string } }>, reply: FastifyReply) => {
         const userId = request.params.id;
 
@@ -23,7 +24,7 @@ export default fp(
       }
     );
 
-    fastify.get('/seed', { schema: { tags: ['User'] }, preHandler: [fastify.authenticate] }, async () => {
+    fastify.get('/seed', { schema: { tags: ['User'] } }, async () => {
       const { salt, hash } = await generateHash('123456');
 
       return await createUser(fastify.db, {
