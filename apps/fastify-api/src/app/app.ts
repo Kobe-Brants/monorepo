@@ -2,7 +2,7 @@ import * as path from 'path';
 import { FastifyInstance, FastifyPluginOptions } from 'fastify';
 import AutoLoad from '@fastify/autoload';
 import cors from '@fastify/cors';
-import { EnvSchema } from './schemas/dotenv';
+import { EnvSchema } from './utils/dotenv';
 import Env from '@fastify/env';
 
 export async function app(fastify: FastifyInstance, opts: FastifyPluginOptions) {
@@ -14,18 +14,6 @@ export async function app(fastify: FastifyInstance, opts: FastifyPluginOptions) 
 
   fastify.register(cors);
 
-  // TODO move
-  // fastify.addSchema({
-  //   $id: 'user',
-  //   type: 'object',
-  //   properties: {
-  //     id: {
-  //       type: 'string',
-  //       description: 'user id',
-  //     },
-  //   },
-  // });
-
   await fastify.register(AutoLoad, {
     dir: path.join(__dirname, 'plugins'),
     options: { ...opts },
@@ -33,7 +21,7 @@ export async function app(fastify: FastifyInstance, opts: FastifyPluginOptions) 
 
   await fastify.register(AutoLoad, {
     dir: path.join(__dirname, 'routes'),
-    options: { ...opts, autoHooks: true, cascadeHooks: true },
+    options: { ...opts, autoHooks: true, cascadeHooks: true, prefix: '/api' },
   });
 
   if (fastify.config.NODE_ENV === 'development') {
@@ -41,10 +29,8 @@ export async function app(fastify: FastifyInstance, opts: FastifyPluginOptions) 
     console.log(fastify.printRoutes());
   }
 
+  // INFO: Example Hook
   fastify.addHook('onRequest', (request, reply, done) => {
-    // TODO
-
-    request.jwtVerify();
     done();
   });
 }

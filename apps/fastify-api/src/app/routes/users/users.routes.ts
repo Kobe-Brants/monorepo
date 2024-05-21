@@ -6,20 +6,24 @@ import { generateHash } from '../../utils/generate_hash';
 
 export default fp(
   async function users(fastify: FastifyInstance) {
-    fastify.get('/', async () => {
+    fastify.get('/', { schema: { tags: ['User'], operationId: 'getUsers' }, preHandler: [fastify.authenticate] }, async () => {
       return getAllUsers(fastify.db);
     });
 
-    fastify.get('/:id', async (request: FastifyRequest<{ Params: { id: string } }>, reply: FastifyReply) => {
-      const userId = request.params.id;
+    fastify.get(
+      '/:id',
+      { schema: { tags: ['User'], operationId: 'getUser' }, preHandler: [fastify.authenticate] },
+      async (request: FastifyRequest<{ Params: { id: string } }>, reply: FastifyReply) => {
+        const userId = request.params.id;
 
-      const user = await getUserById(fastify.db, userId);
-      if (user) return user;
+        const user = await getUserById(fastify.db, userId);
+        if (user) return user;
 
-      reply.code(404).send({ error: 'Not found' });
-    });
+        reply.code(404).send({ error: 'Not found' });
+      }
+    );
 
-    fastify.get('/seed', async () => {
+    fastify.get('/seed', { schema: { tags: ['User'] }, preHandler: [fastify.authenticate] }, async () => {
       const { salt, hash } = await generateHash('123456');
 
       return await createUser(fastify.db, {
@@ -30,7 +34,7 @@ export default fp(
       } as User);
     });
 
-    fastify.post('/', async (request: FastifyRequest<{ Body: { name: string } }>, reply: FastifyReply) => {
+    fastify.post('/', { schema: { tags: ['User'] }, preHandler: [fastify.authenticate] }, async (request: FastifyRequest<{ Body: { name: string } }>, reply: FastifyReply) => {
       const body = request.body;
       const createdUser = await createUser(fastify.db, body as User);
 
@@ -39,6 +43,7 @@ export default fp(
 
     fastify.put(
       '/:id',
+      { schema: { tags: ['User'] }, preHandler: [fastify.authenticate] },
       async (
         request: FastifyRequest<{
           Params: { id: string };
@@ -54,7 +59,7 @@ export default fp(
       }
     );
 
-    fastify.delete('/:id', async (request: FastifyRequest<{ Params: { id: string } }>, reply: FastifyReply) => {
+    fastify.delete('/:id', { schema: { tags: ['User'] }, preHandler: [fastify.authenticate] }, async (request: FastifyRequest<{ Params: { id: string } }>, reply: FastifyReply) => {
       const userId = request.params.id;
       await deleteUser(fastify.db, userId);
 

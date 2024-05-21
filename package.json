@@ -9,7 +9,7 @@
     "test": "nx run vue:test",
     "e2e": "nx run vue-e2e:e2e",
     "build": "nx run vue:build --configuration=production",
-    "api-gen:fastify-api": "openapi-typescript http://localhost:3000/documentation/json --output .libs/fastify-openapi-gen/src/lib/models.ts",
+    "api-gen:fastify-api": "typegen http://localhost:3000/documentation/json > libs/fastify-openapi-gen/src/lib/openapi.d.ts",
     "drizzle:studio": "nx run fastify-api:drizzle-studio",
     "drizzle:generate": "nx run fastify-api:drizzle-generate",
     "drizzle:push": "nx run fastify-api:drizzle-push",
@@ -27,11 +27,14 @@
     "axios": "^1.6.8",
     "better-sqlite3": "^10.0.0",
     "drizzle-orm": "^0.30.10",
-    "fastify": "~4.13.0",
+    "fastify": "~4.15.0",
     "fastify-plugin": "~4.5.0",
+    "fastify-zod": "^1.4.0",
+    "openapi-client-axios": "^7.5.4",
     "tslib": "^2.3.0",
     "vue": "^3.3.4",
-    "vue-router": "^4.3.2"
+    "vue-router": "^4.3.2",
+    "zod": "^3.23.8"
   },
   "devDependencies": {
     "@nx/cypress": "19.0.3",
@@ -70,7 +73,6 @@
     "jest-environment-node": "^29.4.1",
     "jsdom": "~22.1.0",
     "nx": "19.0.3",
-    "openapi-typescript": "5.4.2",
     "prettier": "^2.8.8",
     "ts-jest": "^29.1.0",
     "ts-node": "10.9.1",

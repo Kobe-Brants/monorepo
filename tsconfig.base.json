@@ -15,7 +15,8 @@
     "skipDefaultLibCheck": true,
     "baseUrl": ".",
     "paths": {
-      "@monorepo-demo/fastify-openapi-gen": ["libs/fastify-openapi-gen/src/index.ts"]
+      "@monorepo-demo/fastify-openapi-gen": ["libs/fastify-openapi-gen/src/index.ts"],
+      "@monorepo-demo/fastify-openapi-gen/client": ["libs/fastify-openapi-gen/src/lib/openapi.d.ts"]
     }
   },
   "exclude": ["node_modules", "tmp"]

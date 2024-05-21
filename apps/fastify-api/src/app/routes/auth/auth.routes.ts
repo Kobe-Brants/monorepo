@@ -1,15 +1,18 @@
 import fp from 'fastify-plugin';
-import { LoginBodySchema, LoginBodySchemaType } from './schemas/login';
 import { generateHash } from '../../utils/generate_hash';
 import { getUserByEmail } from '../../controllers/users';
+import { $ref, LoginBodySchema } from './schemas/login';
 
 export default fp(
   async function auth(fastify) {
-    fastify.post<{ Body: LoginBodySchemaType }>(
+    fastify.post<{ Body: LoginBodySchema }>(
       '/login',
       {
         schema: {
-          body: LoginBodySchema,
+          body: $ref('loginBodySchema'),
+          response: { 200: $ref('loginResponseSchema') },
+          tags: ['Auth'],
+          operationId: 'login',
         },
       },
       async request => {

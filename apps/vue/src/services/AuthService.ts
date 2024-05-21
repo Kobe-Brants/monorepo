@@ -9,12 +9,8 @@ const api = new OpenAPIClientAxios({
 });
 
 export default {
-  async getUsers() {
+  async login(body) {
     const client = await api.init<ApiClient>();
-    return await client.getUsers();
-  },
-  async getUser(id: string) {
-    const client = await api.init<ApiClient>();
-    return await client.getUser({ id });
+    return await client.login({}, body);
   },
 };
