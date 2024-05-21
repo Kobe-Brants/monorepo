@@ -1,13 +1,6 @@
-import OpenAPIClientAxios from 'openapi-client-axios';
 import { Client as ApiClient } from '@monorepo-demo/fastify-openapi-gen/client';
 import { Paths } from '@monorepo-demo/fastify-openapi-gen/client';
-
-const api = new OpenAPIClientAxios({
-  definition: 'http://localhost:3000/documentation/json',
-  axiosConfigDefaults: {
-    baseURL: 'http://localhost:3000',
-  },
-});
+import { api } from '../main';
 
 export type LoginRequestBody = Paths.Login.RequestBody;
 

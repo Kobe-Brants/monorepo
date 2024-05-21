@@ -33,7 +33,7 @@ export default fp(
             email: user.email,
           }),
         };
-        return { success: 'true', data };
+        return { result: 200, token: data.token };
       }
     );
   },
