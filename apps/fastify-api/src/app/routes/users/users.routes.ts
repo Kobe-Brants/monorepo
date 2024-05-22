@@ -3,7 +3,7 @@ import { createUser, deleteUser, getAllUsers, getUserById, updateUser } from '..
 import fp from 'fastify-plugin';
 import { User } from '../../../drizzle-schemas/users';
 import { generateHash } from '../../utils/generate_hash';
-import { $ref, GetUserResponseBodySchema, GetUsersResponseBodySchema } from './users.schemas';
+import { $ref } from './users.schemas';
 
 export default fp(
   async function users(fastify: FastifyInstance) {

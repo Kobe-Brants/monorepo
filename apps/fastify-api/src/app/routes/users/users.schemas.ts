@@ -28,5 +28,5 @@ export const { schemas: userSchemas, $ref } = buildJsonSchemas(
     getUsersResponseBodySchema,
     getUserResponseBodySchema,
   },
-  { $id: 'usersSchemas' }
+  { $id: 'Users' }
 );

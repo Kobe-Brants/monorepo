@@ -1,4 +1,3 @@
-import OpenAPIClientAxios from 'openapi-client-axios';
 import { Client as ApiClient, Components } from '@monorepo-demo/fastify-openapi-gen/client';
 import { api } from '../main';
 

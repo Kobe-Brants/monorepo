@@ -17,5 +17,5 @@ export const { schemas: authSchemas, $ref } = buildJsonSchemas(
     loginBodySchema,
     loginResponseSchema,
   },
-  { $id: 'authSchemas' }
+  { $id: 'Auth' }
 );

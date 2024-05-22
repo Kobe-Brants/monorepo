@@ -7,8 +7,8 @@ export default fp<FastifyDynamicSwaggerOptions>(async fastify => {
   await fastify.register(Swagger, {
     openapi: {
       info: {
-        title: 'Fastify',
-        description: 'API Endpoints for Fastify',
+        title: 'Kobeee',
+        description: 'API Endpoints for demo',
         version: '0.1.0',
       },
       components: {
